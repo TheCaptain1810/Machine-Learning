@@ -13,3 +13,7 @@ df = pd.get_dummies(df, columns=non_numeric_columns)
 
 print("\nDataFrame with One-Hot Encoding:")
 print(df)
+
+# Save the processed DataFrame to a new CSV file
+processed_file_path = '/Machine Learning/Housing_onehot.csv'
+df.to_csv(processed_file_path, index=False)
