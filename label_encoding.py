@@ -16,3 +16,7 @@ for col in non_numeric_columns:
 
 print("\nDataFrame with Label Encoding:")
 print(df)
+
+# Save the processed DataFrame to a new CSV file
+processed_file_path = '/Machine Learning/Housing_processed.csv'
+df.to_csv(processed_file_path, index=False)
