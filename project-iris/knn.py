@@ -9,7 +9,8 @@ from sklearn.metrics import classification_report, confusion_matrix
 
 # Step 2: Load the Data from CSV
 print("Step 2: Loading the dataset...")
-df = pd.read_csv('./iris dataset/iris.data')
+column_names = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species']
+df = pd.read_csv('./iris dataset/iris.data', header=None, names=column_names)
 
 # Display the first few rows of the dataframe
 print("First few rows of the dataset:")
@@ -44,16 +45,19 @@ for k in [3, 4, 5]:
     conf_matrix = confusion_matrix(y_test, y_pred)
     print("Confusion Matrix:")
     print(conf_matrix)
-    
+
     class_report = classification_report(y_test, y_pred, output_dict=True)
-    
-    # Extract accuracy, precision, recall, and F1-score for the positive class (1)
-    accuracy = np.mean(y_pred == y_test)
-    precision = class_report['1']['precision']
-    recall = class_report['1']['recall']
-    f1 = class_report['1']['f1-score']
-    
+
+    # Extract overall accuracy
+    accuracy = class_report['accuracy']
+
+    # Calculate average precision, recall, and F1-score across all classes
+    classes = [c for c in class_report.keys() if c != 'accuracy']
+    precision = np.mean([class_report[c]['precision'] for c in classes])
+    recall = np.mean([class_report[c]['recall'] for c in classes])
+    f1 = np.mean([class_report[c]['f1-score'] for c in classes])
+
     print(f"Accuracy: {accuracy * 100:.2f}%")
-    print(f"Precision: {precision:.2f}")
-    print(f"Recall: {recall:.2f}")
-    print(f"F1 Score: {f1:.2f}")
+    print(f"Average Precision: {precision:.2f}")
+    print(f"Average Recall: {recall:.2f}")
+    print(f"Average F1 Score: {f1:.2f}")
