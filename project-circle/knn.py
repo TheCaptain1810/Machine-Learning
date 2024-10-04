@@ -9,8 +9,8 @@ from sklearn.metrics import classification_report, confusion_matrix
 
 # Step 2: Load the Data from CSV
 print("Step 2: Loading the dataset...")
-column_names = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species']
-df = pd.read_csv('./iris dataset/iris.data', header=None, names=column_names)
+column_names = ['x', 'y', 'class']
+df = pd.read_csv('circle-dataset/circles.txt', header=0, names=column_names)
 
 # Display the first few rows of the dataframe
 print("First few rows of the dataset:")

@@ -5,14 +5,15 @@ import matplotlib.pyplot as mtp
 import pandas as pd  
       
 #importing datasets  
-data_set= pd.read_csv('./iris dataset/iris.data')  
-data_set
+data_set = pd.read_csv('./circle-dataset/circles.txt')  
+print(data_set.head())  # Add this line to see the first few rows of the dataset
 
-#Extracting Independent and dependent Variable  
-x= data_set.iloc[:, [2,3]].values  
-y= data_set.iloc[:, 4].values  # This should contain string labels like 'setosa', 'versicolor', 'virginica'
-x
-y
+# Modify these lines
+x = data_set.iloc[:, :-1].values  # Select all columns except the last one
+y = data_set.iloc[:, -1].values   # Select only the last column
+
+print("Shape of x:", x.shape)
+print("Shape of y:", y.shape)
 
 # Splitting the dataset into training and test set.  
 from sklearn.model_selection import train_test_split  

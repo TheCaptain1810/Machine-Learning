@@ -6,12 +6,18 @@ from sklearn.metrics import mean_squared_error, r2_score
 import matplotlib.pyplot as plt
 
 # Load the CSV file into a DataFrame
-column_names = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species']
-data = pd.read_csv('./iris dataset/iris.data', header=None, names=column_names)
+data = pd.read_csv('./circle-dataset/circles.txt')
 
-# For simplicity, let's use sepal length to predict petal length
-X = data[['sepal_length']]
-y = data['petal_length']
+# Print the first few rows and data info to understand the structure
+print(data.head())
+print(data.info())
+
+# Select 'x' and 'y' columns
+X = data['x'].values.reshape(-1, 1)  # Reshape to 2D array
+y = data['y'].values
+
+print("Shape of X:", X.shape)
+print("Shape of y:", y.shape)
 
 # Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
@@ -41,8 +47,8 @@ print(f"R-squared Score: {r2:.2f}")
 # Plot the regression line
 plt.scatter(X_test, y_test, label='Test Data', color='blue')
 plt.plot(X_test, y_pred, label='Regression Line', color='red')
-plt.xlabel('Sepal Length')
-plt.ylabel('Petal Length')
+plt.xlabel('X')
+plt.ylabel('Y')
 plt.legend()
-plt.title('Sepal Length vs Petal Length')
+plt.title('X vs Y')
 plt.show()
