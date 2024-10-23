@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
+from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import r2_score, mean_squared_error, accuracy_score
 import matplotlib.pyplot as plt
 
@@ -16,7 +16,7 @@ y = data['class']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Create and train the model
-model = LinearRegression()
+model = DecisionTreeRegressor(random_state=42)
 model.fit(X_train, y_train)
 
 # Make predictions
@@ -37,5 +37,5 @@ print(f"Accuracy: {accuracy}")
 plt.scatter(y_test, y_pred)
 plt.xlabel("Actual Values")
 plt.ylabel("Predicted Values")
-plt.title("Linear Regression: Actual vs Predicted")
+plt.title("Decision Tree Regression: Actual vs Predicted")
 plt.show()
